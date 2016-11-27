@@ -30,7 +30,7 @@
 
   (binding [s/*recursion-limit* 0]
     (clojure.pprint/pprint
-      (s/exercise :app/dept 1)))
+      (s/exercise :unq.app/dept 1)))
 
 
   ;(s/conform :unq.app/model {:id 45 :name "asdf"})
@@ -46,7 +46,7 @@
   ;;as entity map
   (binding [s/*recursion-limit* 0]
     (clojure.pprint/pprint
-      (s/exercise :entity.app/dept 2)))
+      (s/exercise :etype.app/dept 2)))
 
 
   (binding [s/*recursion-limit* 1]
