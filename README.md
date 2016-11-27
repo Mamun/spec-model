@@ -7,19 +7,19 @@ Status: **Alpha**
 
 ## Latest version 
 
-[![Clojars Project](http://clojars.org/mamun/spec-model/latest-version.svg)](http://clojars.org/mamun/spec-model)  
+[![Clojars Project](https://img.shields.io/clojars/v/spec-model.svg)](https://clojars.org/spec-model)
 
 ## Why do you need it 
 
-Clojure spec specifies the structure of your data. But to define your spec for client request validation (unqualified key), business logic (qualified key) or sql data model 
+Clojure spec specifies the structure of your data. But to define your spec for different format of request validation (unqualified key), business logic (qualified key) or sql data model 
 is challenging. Think about your data format in bellow 
 
 
-* {:empl-name "Max" :id 23 :department {:dept-name "IT" :id 10}}
-* {:dept-name "IT" :id 10 :employee-list [{:empl-name "Max" :id 23}]}
-* [{:dept-name "IT" :id 10}]
-* {:department {:dept-name "IT" :id 10}}
-* [{:department {:dept-name "IT" :id 10}}]
+* As join {:empl-name "Max" :id 23 :department {:dept-name "IT" :id 10}}
+* As reverse join {:dept-name "IT" :id 10 :employee-list [{:empl-name "Max" :id 23}]}
+* As list [{:dept-name "IT" :id 10}]
+* As entity type {:department {:dept-name "IT" :id 10}}
+* As entity type list [{:department {:dept-name "IT" :id 10}}]
 
 
 How do you define spec that is understandable to all ? How do you add relation among entity? As a developer do you really need to care all of them?  
@@ -60,7 +60,7 @@ How do you define spec that is understandable to all ? How do you add relation a
 ;; entity.un-app/dept  {:dept {:id 1 :name "a"}}
 
 
-; Example   
+; Check spec for namespace     
 (binding [s/*recursion-limit* 0]
     (clojure.pprint/pprint
       (s/exercise :app/dept 1)))
@@ -70,13 +70,21 @@ How do you define spec that is understandable to all ? How do you add relation a
   (clojure.pprint/pprint
    (s/exercise :app/dept-list 1)))
       
+; Check spec for unq namespace 
+
+ (binding [s/*recursion-limit* 0]
+     (clojure.pprint/pprint
+       (s/exercise :unq.app/dept 1)))
+       
+; Check spec for string value 
+ (binding [s/*recursion-limit* 0]
+     (clojure.pprint/pprint
+       (s/exercise :ex.app/dept 1)))
 
       
-      
-
 ```
 
-To check full list of spec
+To check full list of generate spec
 ```clj
  
  (gen-spec :app '{:dept    {:req {:id   int?
