@@ -15,11 +15,11 @@ Clojure spec specifies the structure of your data. But to define your spec for c
 is challenging. Think about your data format in bellow 
 
 
-{:empl-name "Max" :id 23 :department {:dept-name "IT" :id 10}}
-{:dept-name "IT" :id 10 :employee-list [{:empl-name "Max" :id 23}]}
-[{:dept-name "IT" :id 10}]
-{:department {:dept-name "IT" :id 10}}
-[{:department {:dept-name "IT" :id 10}}]
+* {:empl-name "Max" :id 23 :department {:dept-name "IT" :id 10}}
+* {:dept-name "IT" :id 10 :employee-list [{:empl-name "Max" :id 23}]}
+* [{:dept-name "IT" :id 10}]
+* {:department {:dept-name "IT" :id 10}}
+* [{:department {:dept-name "IT" :id 10}}]
 
 
 How do you define spec that is understandable to all ? How do you add relation among entity? As a developer do you really need to care all of them?  
@@ -27,7 +27,7 @@ How do you define spec that is understandable to all ? How do you add relation a
      
 
 ## Features
-* Like UML tools, define model get spec.
+* Like UML tools, define model and spec-model will generate spec.
 * Generate spec with convention, as a result everyone within team know about spec registry.
 * Generate spec for qualified key, unqualified key (with prefix -unq). 
 * Generate spec for string value (With prefix ex-) as coercions.     
@@ -71,10 +71,6 @@ How do you define spec that is understandable to all ? How do you add relation a
    (s/exercise :app/dept-list 1)))
       
 
-;; For any entity       
-(binding [s/*recursion-limit* 0]
-    (clojure.pprint/pprint
-      (s/exercise :un-app/entity 1)))
       
       
 
