@@ -70,10 +70,14 @@
        (reduce (fn [acc [s _ r d _]]
                  (update-in acc s
                             (fn [m]
-                              (if (or (= r :spec-model.core/rel-1-1)
-                                      (= r :spec-model.core/rel-n-1))
-                                (assoc m d (first (get target-data-m d)))
-                                (assoc m d (get target-data-m d)))))
+                              (cond (or (= r :spec-model.core/rel-1-1)
+                                        (= r :spec-model.core/rel-n-1))
+                                    (assoc m d (first (get target-data-m d)))
+                                    (= r :spec-model.core/rel-1-n)
+                                    (assoc m d (get target-data-m d))
+                                    :else
+                                    m
+                                    )))
                  ) data)))
 
 
@@ -125,7 +129,6 @@
                :note         ""}}]
     ;(assoc-join-key data j)
     (assoc-join-key data j)
-
 
     )
 

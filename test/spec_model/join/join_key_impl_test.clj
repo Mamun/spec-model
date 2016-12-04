@@ -98,6 +98,37 @@
     )
 
 
+  (testing "assoc-join-key n-n"
+    (let [meeting {:meeting {:subject  "Hello Meeting for IT"
+                             :id 2
+                             :employee-list [{:current_transaction_id 1,
+                                              :dept_id                2,
+                                              :lastname               "Zoma",
+                                              :firstname              "Abba"
+                                              :id                     3}
+                                             {:current_transaction_id 1,
+                                              :dept_id                2,
+                                              :lastname               "Zoma",
+                                              :firstname              "Abba"
+                                              :id                     4}]}}
+          join [[:meeting :id :spec-model.core/rel-n-n :employee :id [:meeting-epl :mid :eid]]]
+          ]
+      (=       (assoc-join-key meeting join)
+        {:meeting {:subject "Hello Meeting for IT",
+                   :id 2,
+                   :employee-list [{:current_transaction_id 1, :dept_id 2, :lastname "Zoma", :firstname "Abba", :id 3}
+                                   {:current_transaction_id 1, :dept_id 2, :lastname "Zoma", :firstname "Abba", :id 4}]},
+         :meeting-epl [{:eid 2, :mid 3} {:eid 2, :mid 4}]}
+
+        )
+
+
+
+      )
+
+    )
+
+
   )
 
 ;(assoc-join-key-test)
